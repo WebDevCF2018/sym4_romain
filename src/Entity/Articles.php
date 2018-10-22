@@ -67,6 +67,7 @@ class Articles
      *   }
      * )
      */
+
     private $sectionssections;
 
     /**
@@ -155,5 +156,6 @@ class Articles
 
         return $this;
     }
+
 
 }
