@@ -1,9 +1,10 @@
 {% extends 'template.html.twig' %}
-{% block title %}{{ parent() }} - {{ articles.getThetitle }}{% endblock %}
+{% block title %}{{ parent() }} - {{ articles.getThesection }}{% endblock %}
 
-{% block titre %}{{ parent() }} - {{ articles.getThetitle }}{% endblock %}
+{% block titre %}<br><br><h1 class="text-uppercase">
+    <strong>{{ parent() }} - {{ articles.getThesection }}</strong></h1>{% endblock %}
+
 {% block stitre %}Détail de notre article {% endblock %}
-
 {% block menu %}
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
@@ -13,7 +14,7 @@
         </li>
         {% for itemMenu in sections %}
         <li class="nav-item">
-            <a class="nav-link" href="{{ path("detail_section",{"id":itemMenu.getIdsections}) }}">{{ itemMenu.getThetitled }}</a>
+            <a class="nav-link" href="{{ path("detail_section",{"id":itemMenu.getIdsections}) }}">{{ itemMenu.getThesection }}</a>
         </li>
         {% endfor %}
         <li class="nav-item"> <a class="nav-link" href="{{ path('articles_index')}}">Admin</a></li>
@@ -24,10 +25,10 @@
         <h2>{{ articles.getThetitle }}</h2>
         <h3>
             {% for categ in articles.getSectionssections %}
-                <a href="{{ path("detail_section",{"id":categ.getIdsections}) }}">{{ categ.getThetitled }}</a> |
+                <a href="{{ path("detail_section",{"id":categ.getIdsections}) }}">{{ categ.getThesection }}</a> |
             {% endfor %}
         </h3>
-        <p>{{ articles.getThetext|nl2br }}</p>
-        <h4>Par {{ articles.getUsersusers.getTherealname }} le {{ articles.getThedate|date("d/m/Y à H \\h i \\m") }}</h4><hr>
+        <p>{{ articles.getThetxt|nl2br }}</p>
+        <h4>Par {{ articles.getAuteursauteurs.getThename }} le {{ articles.getThedate|date("d/m/Y à H \\h i \\m") }}</h4><hr>
 {% endblock %}
 
