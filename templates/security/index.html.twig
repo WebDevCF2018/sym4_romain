@@ -1,0 +1,32 @@
+{% extends 'template.html.twig' %}
+{% block title %}{{ parent() }} - connexion{% endblock %}
+
+{% block titre %}{{ parent() }} - connexion{% endblock %}
+{% block stitre %}connectez-vous sur notre site d'actualité pour Webdev{% endblock %}
+
+{% block menu %}
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path("accueil") }}">Accueil
+                <span class="sr-only">(current)</span>
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block contenu %}
+{% if error %}
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+<form action="{{ path('login') }}" method="post">
+    <label for="username">Votre identifiant:</label>
+    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+    <label for="password">Votre mot de passe:</label>
+    <input type="password" id="password" name="_password" />
+
+
+    <button type="submit">connexion</button>
+</form>
+{% endblock %}

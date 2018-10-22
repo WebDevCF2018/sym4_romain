@@ -1,0 +1,25 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}{{parent()}} - Modifier {{ article.thetitle }}{% endblock %}
+{% block menu %}
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ path("articles_index") }}">Accueil de l'administration</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ path('articles_new') }}">Créer un nouvel article</a>
+        </li>
+        <li class="nav-item"> 
+            <a class="nav-link" href="{{ path('the_logout')}}">Déconnexion</a>
+        </li>
+    </ul>
+{% endblock %}
+{% block contenu %}
+    <p class="lead">{% block stitre %}Modifier {{ article.thetitle }}{% endblock %}</p>
+
+    {{ include('articles/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    <hr> <a href="{{ path('articles_index') }}">Retour à l'accueil</a><hr>
+
+    {{ include('articles/_delete_form.html.twig') }}
+{% endblock %}

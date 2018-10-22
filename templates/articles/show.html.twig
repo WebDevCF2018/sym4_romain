@@ -1,0 +1,46 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}{{parent()}} - {{ article.thetitle }}{% endblock %}
+{% block menu %}
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path("articles_index") }}">Accueil de l'administration</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('articles_new') }}">Créer un nouvel article</a>
+        </li>
+        <li class="nav-item"> 
+            <a class="nav-link" href="{{ path('the_logout')}}">Déconnexion</a>
+        </li>
+    </ul>
+{% endblock %}
+{% block contenu %}
+    <p class="lead">{% block stitre %}{{ article.thetitle }}{% endblock %}</p>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Idarticles</th>
+                <td>{{ article.idarticles }}</td>
+            </tr>
+            <tr>
+                <th>Thetitle</th>
+                <td>{{ article.thetitle }}</td>
+            </tr>
+            <tr>
+                <th>Thetext</th>
+                <td>{{ article.thetext }}</td>
+            </tr>
+            <tr>
+                <th>Thedate</th>
+                <td>{{ article.thedate ? article.thedate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+                <a href="{{ path('articles_index') }}">Retour à l'accueil</a><hr>
+
+                <a href="{{ path('articles_edit', {'idarticles': article.idarticles}) }}">Modifier</a><hr>
+
+    {{ include('articles/_delete_form.html.twig') }}
+{% endblock %}

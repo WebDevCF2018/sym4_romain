@@ -1,0 +1,45 @@
+{% extends 'template.html.twig' %}
+{% block title %}{{ parent() }} - {{ section.getThetitled }}{% endblock %}
+
+{% block titre %}{{ parent() }} - {{ section.getThetitled }}{% endblock %}
+{% block stitre %}{{ section.getThedesc }} {% endblock %}
+
+{% block menu %}
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path("accueil") }}">Accueil
+                <span class="sr-only">(current)</span>
+            </a>
+        </li>
+        {% for itemMenu in sections %}
+            {# if current section is selected on this loops'turn #}
+            {% if(itemMenu.getIdsections == section.getIdsections) %}
+                {# create forActive Twig's local variable#}
+                {% set forActive = "active" %}
+            {% else %}
+                {% set forActive = "" %}
+            {% endif %}
+        <li class="nav-item {{ forActive }}">
+            <a class="nav-link" href="{{ path("detail_section",{'id':itemMenu.getIdsections}) }}">{{ itemMenu.getThetitled }}</a>
+        </li>
+        {% endfor %}
+        <li class="nav-item"> <a class="nav-link" href="{{ path('articles_index')}}">Admin</a></li>
+    </ul>
+{% endblock %}
+
+{% block contenu %}
+    {% if articles is empty %}
+        <h3><small>Il n'y a pas encore d'article dans cette rubrique</small> <a href="{{ path("accueil") }}">Retour à l'accueil</a></h3><hr>
+    {% endif %}
+    {% for item in articles %}
+        <h2>{{ item.getThetitle }}</h2>
+        <h3>
+            {% for categ in item.getSectionssections %}
+                <a href="{{ path("detail_section",{"id":categ.getIdsections}) }}">{{ categ.getThetitled }}</a> |
+            {% endfor %}
+        </h3>
+        <p>{{ item.getThetext|truncate(350,true) }} <a href="{{ path("detail_article",{'id': item.getIdarticles}) }}">Lire la suite</a></p>
+        <h4>Par {{ item.getUsersusers.getTherealname }} le {{ item.getThedate|date("d/m/Y à H \\h i \\m") }}</h4><hr>
+    {% endfor %}
+{% endblock %}
+

@@ -1,0 +1,50 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}{{parent()}} - Liste des articles{% endblock %}
+{% block menu %}
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ path("articles_index") }}">Accueil de l'administration</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('articles_new') }}">Créer un nouvel article</a>
+        </li>
+        <li class="nav-item"> 
+            <a class="nav-link" href="{{ path('the_logout')}}">Déconnexion</a>
+        </li>
+    </ul>
+{% endblock %}
+{% block contenu %}
+    <p class="lead">{% block stitre %}Liste de tous nos articles{% endblock %}</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idarticles</th>
+                <th>Thetitle</th>
+                <th>Thetext</th>
+                <th>Thedate</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.idarticles }}</td>
+                <td>{{ article.thetitle }}</td>
+                <td>{{ article.thetext }}</td>
+                <td>{{ article.thedate ? article.thedate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('articles_show', {'idarticles': article.idarticles}) }}">voir</a>
+                    <a href="{{ path('articles_edit', {'idarticles': article.idarticles}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">pas encore d'article</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('articles_new') }}">Créer un nouvel article</a>
+{% endblock %}

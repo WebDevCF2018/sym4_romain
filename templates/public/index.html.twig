@@ -1,0 +1,40 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}{{ parent() }} - Accueil{% endblock %}
+
+{% block titre %}<br><br><h1 class="text-uppercase">
+    <strong>{{ parent() }} - accueil </strong></h1>{% endblock %}
+{% block stitre %}Bienvenue sur notre site sur le thème des doctrines générales{% endblock %}
+
+{% block menu %}
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ path("accueil") }}">Accueil
+                <span class="sr-only">(current)</span>
+            </a>
+        </li>
+        {% for itemMenu in sections %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path("detail_section",{"id":itemMenu.getIdsections}) }}">{{ itemMenu.getThesection }}</a>
+            </li>
+        {% endfor %}
+        <li class="nav-item"> <a class="nav-link" href="{{ path('articles_index')}}">Admin</a></li>
+    </ul>
+{% endblock %}
+
+{% block contenu %}
+    {% if articles is empty %}
+        <h3>Il n'y a pas encore d'article sur notre site</h3><hr>
+    {% endif %}
+    {% for item in articles %}
+        <h2>{{ item.getThetitle }}</h2>
+        <h3>
+            {% for categ in item.getSectionssections %}
+                <a href="{{ path("detail_section",{"id":categ.getIdsections}) }}">{{ categ.getThesection }}</a> |
+            {% endfor %}
+        </h3>
+        <p>{{ item.getThetxt|truncate(350,true) }} <a href="{{ path("detail_article",{'id': item.getIdarticles}) }}">Lire la suite</a></p>
+        <h4>Par {{ item.getAuteursauteurs.getThename }} le {{ item.getThedate|date("d/m/Y à H \\h i \\m") }}</h4><hr>
+    {% endfor %}
+{% endblock %}
+
