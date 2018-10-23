@@ -1,7 +1,7 @@
 {% extends 'template.html.twig' %}
-{% block title %}{{ parent() }} - {{ section.getThesection}}{% endblock %}
+{% block title %}{{ parent() }} - {{ articles.getThetitle}}{% endblock %}
 
-{% block titre %}<br><br><h1 class="text-uppercase">{{ parent() }} - {{ section.getThesection }}</h1>{% endblock %}
+{% block titre %}<br><br><h1 class="text-uppercase">{{ parent() }} - {{ articles.getThetitle }}</h1>{% endblock %}
 
 {% block stitre %}Détail de notre article {% endblock %}
 {% block menu %}
